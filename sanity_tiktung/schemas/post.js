@@ -27,13 +27,15 @@ export default {
             type: 'postedBy',
         },
         {
-            name: 'like',
-            title: 'Like',
+            name: 'likes',
+            title: 'Likes',
             type: 'array',
-            of: [{
-                type: 'reference',
-                to: [{ type: 'user' }],
-            }],
+            of: [
+                {
+                    type: 'reference',
+                    to: [{ type: 'user' }],
+                },
+            ],
         },
         {
             name: 'comments',

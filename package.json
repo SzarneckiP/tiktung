@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-oauth/google": "^0.8.0",
+    "@react-oauth/google": "^0.8.1",
     "@sanity/client": "^5.3.0",
     "@types/node": "18.15.3",
     "@types/react": "18.0.28",
@@ -18,6 +18,7 @@
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
     "gapi-script": "^1.2.0",
+    "jwt-decode": "^3.1.2",
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",

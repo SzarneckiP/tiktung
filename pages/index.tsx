@@ -1,6 +1,15 @@
 import Head from 'next/head'
+import axios from 'axios'
 
-export default function Home() {
+import { Video } from '@/types'
+import { VideoCard, NoResults } from '@/components'
+
+interface IProps {
+  videos: Video[]
+}
+
+const Home = ({ videos }: IProps) => {
+
   return (
     <>
       <Head>
@@ -10,10 +19,29 @@ export default function Home() {
         <link rel="icon" href="/tiktung-logo.512.png" />
       </Head>
       <main>
-        <h1 className="text-3xl font-bold underline">
-          Hello world!
-        </h1>
+        <div className='flex flex-col gap-10 videos h-full'>
+          {videos?.length ? (
+            videos.map((video: Video) => (
+              <VideoCard post={video} key={video._id} />
+            ))
+
+          ) : (
+            <NoResults text={'There are no Videos'} />
+          )}
+        </div>
       </main>
     </>
   )
 }
+
+export const getServerSideProps = async () => {
+  const { data } = await axios.get('http://localhost:3000/api/post')
+
+  return {
+    props: {
+      videos: data,
+    }
+  }
+}
+
+export default Home
