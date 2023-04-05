@@ -2,23 +2,35 @@ import React, { useState } from 'react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import GoogleLogin from 'react-google-login'
+
 import { useGoogleLogin } from '@react-oauth/google';
 import { AiFillHome, AiOutlineMenu } from 'react-icons/ai'
 import { ImCancelCircle } from 'react-icons/im'
 
 import { Discover, SuggestedAccounts, Footer } from '../components'
+import useAuthStore from '@/store/authStore'
+import { createOrGetUser } from '@/utils';
+import axios from 'axios';
 
 const Sidebar = () => {
     const [showSidebar, setShowSidebar] = useState(true)
 
-    const userProfile = false
+    const { userProfile, addUser } = useAuthStore()
 
     const normalLink = 'flex item-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer font-semibold text-[#f51997] rounded'
 
-    const login = useGoogleLogin({
-        onSuccess: codeResponse => { console.log(codeResponse) },
-        onError: () => { console.log('Login Failed') },
+
+    const googleLogin = useGoogleLogin({
+        onSuccess: async (tokenResponse) => {
+
+            const userInfo = await axios.get(
+                'https://www.googleapis.com/oauth2/v3/userinfo',
+                { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } },
+            );
+
+            createOrGetUser(userInfo.data, addUser)
+        },
+        onError: errorResponse => console.log(errorResponse),
     });
 
     return (
@@ -49,7 +61,7 @@ const Sidebar = () => {
                             <div className='pr-4'>
                                 <button
                                     className='bg-white text-lg text-[#f51997] border-[1px] border-[#f51997] font-semibold px-6 py-3 rounded-md outline-none w-full mt-3 hover:text-white hover:bg-[#f51997] cursor:pointer'
-                                    onClick={() => login()}
+                                    onClick={() => googleLogin()}
                                 >
                                     LogIn
                                 </button>
