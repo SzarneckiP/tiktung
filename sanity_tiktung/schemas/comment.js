@@ -12,6 +12,12 @@ export default {
             name: 'comment',
             title: 'Comment',
             type: 'string',
-        }
+        },
+        {
+            name: 'postedOn',
+            title: 'Posted On',
+            type: 'string',
+            readOnly: true,
+        },
     ]
 }

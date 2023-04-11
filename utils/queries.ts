@@ -47,6 +47,7 @@ export const postDetailQuery = (postId: string | string[] | undefined) => {
     },
      likes,
     comments[]{
+      postedOn,
       comment,
       _key,
       postedBy->{

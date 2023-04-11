@@ -4,6 +4,8 @@ import { FaPaw, FaMedal, FaGamepad } from 'react-icons/fa';
 
 export const year = new Date().getFullYear()
 
+export const postedOn = new Date().toLocaleString().slice(0, 17)
+
 export const topics = [
   {
     name: 'coding',

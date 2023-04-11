@@ -5,6 +5,7 @@ import { GoVerified } from 'react-icons/go'
 
 import useAuthStore from '@/store/authStore'
 import NoResults from './NoResults'
+import { IUser } from '@/types'
 
 interface IProps {
     isPostingComment: boolean,
@@ -15,6 +16,7 @@ interface IProps {
 }
 
 interface IComment {
+    postedOn: string
     comment: string,
     length?: number,
     _key: string,
@@ -23,16 +25,50 @@ interface IComment {
 
 const Comments = ({ comment, isPostingComment, setComment, addComment, comments }: IProps) => {
 
-    const { userProfile } = useAuthStore()
+    const { userProfile, allUsers } = useAuthStore()
 
     return (
-        <div className='border-t-2 border-gray-200 pt-4 px-10 bg-[#f8f8f8] border-b-2 lg:pb-0 pb-[100px]'>
-            <div className='overflow-scroll lg:h-[44vh] h-[25vh]'>
+        <div className='border-t-2 border-gray-200 mt-4 px-10 bg-[#f8f8f8] border-b-2 lg:pb-0 pb-[100px]'>
+            <div className='overflow-scroll lg:h-[34vh] h-[25vh]'>
                 {comments?.length ? (
-                    <div>
-
-
-                    </div>
+                    comments.map((item, idx) => (
+                        <div key={idx}>
+                            {allUsers.map((user: IUser) => (
+                                user._id === (item.postedBy._id || item.postedBy._ref) && (
+                                    <div className='p-2 items-center' key={idx}>
+                                        <Link className='flex justify-between gap-2 w-auto my-2' href={`/profile/${user._id}`}>
+                                            <div className='flex items-start gap-3'>
+                                                <div className='w-8 h-8 xl:mr-2 mr-0'>
+                                                    <Image
+                                                        className='rounded-full'
+                                                        src={user.image}
+                                                        alt='user profile'
+                                                        width={34}
+                                                        height={34}
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <p className='flex gap-1 items-center text-md font-bold text-primary lowercase'>
+                                                        {user.userName.replaceAll(' ', '')}
+                                                        <GoVerified className='text-blue-400' />
+                                                    </p>
+                                                    <p className='capitalize text-gray-400 text-xs'>
+                                                        {user.userName}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div className='flex justify-end capitalize text-gray-400 text-xs'>
+                                                <p>{item.postedOn}</p>
+                                            </div>
+                                        </Link>
+                                        <div>
+                                            <p>{item.comment}</p>
+                                        </div>
+                                    </div>
+                                )
+                            ))}
+                        </div>
+                    ))
                 ) : (
                     <NoResults text='No comments yet! Be the first one to add comment.' />
                 )}

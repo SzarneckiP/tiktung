@@ -11,7 +11,7 @@ import { BASE_URL } from '@/utils'
 import { Video } from '@/types'
 import useAuthStore from '@/store/authStore'
 import { LikeButton, Comments } from '@/components'
-
+import { postedOn } from '@/utils/constants'
 
 interface IProps {
     postDetails: Video,
@@ -57,7 +57,7 @@ const Detail = ({ postDetails }: IProps) => {
         }
     }
 
-    const addComment = async (e) => {
+    const addComment = async (e: any) => {
         e.preventDefault()
 
         if (userProfile && comment) {
@@ -66,6 +66,7 @@ const Detail = ({ postDetails }: IProps) => {
             const { data } = await axios.put(`${BASE_URL}/api/post/${post._id}`, {
                 userId: userProfile._id,
                 comment,
+                postedOn,
             })
 
             setPost({ ...post, comments: data.comments })
