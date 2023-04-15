@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['s3.viva.pl', 'images.pexels.com', 'www.google.com', 'lh3.googleusercontent.com']
+    domains: ['s3.viva.pl', 'images.pexels.com', 'www.google.com', 'lh3.googleusercontent.com', 'th.bing.com']
   }
 }
 
