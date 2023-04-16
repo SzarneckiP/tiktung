@@ -59,7 +59,7 @@ export const postDetailQuery = (postId: string | string[] | undefined) => {
   return query;
 };
 
-export const searchPostsQuery = (searchTerm: string | string[]) => {
+export const searchPostsQuery = (searchTerm: string | string[] | undefined) => {
   const query = `*[_type == "post" && caption match '${searchTerm}*' || topic match '${searchTerm}*'] {
     _id,
      caption,
@@ -77,6 +77,7 @@ export const searchPostsQuery = (searchTerm: string | string[]) => {
     },
 likes,
     comments[]{
+      postedOn,
       comment,
       _key,
       postedBy->{

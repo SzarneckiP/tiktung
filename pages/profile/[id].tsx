@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { GoVerified } from 'react-icons/go'
 import axios from 'axios'
 
-import { VideoCard, NoResults, Discover } from '@/components'
+import { VideoCard, NoResults } from '@/components'
 import { IUser, Video } from '@/types'
 import { BASE_URL } from '@/utils'
 
