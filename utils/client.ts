@@ -1,8 +1,8 @@
-import sanityClient from '@sanity/client';
+import { createClient } from '@sanity/client';
 
-export const client = sanityClient({
-  projectId: 'gqqx8jm3',
-  dataset: 'production',
+export const client = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
   apiVersion: '2023-03-20',
   useCdn: false,
   token: process.env.NEXT_PUBLIC_SANITY_TOKEN,
