@@ -17,7 +17,7 @@ const page404 = () => {
             />
 
             <span className='text-sm sm:text-xl mt-5 text-gray-500 text-center'>
-                We could't find this page ;(
+                We could't find this page..
             </span>
         </div>
 
