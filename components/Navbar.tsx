@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -13,7 +13,7 @@ import { createOrGetUser } from '../utils';
 import useAuthStore from '../store/authStore'
 
 const Navbar = () => {
-    const { userProfile, addUser, removeUser } = useAuthStore()
+    const { userProfile, addUser, removeUser }: { userProfile: any, addUser: any, removeUser: any } = useAuthStore()
 
     const [searchValue, setSearchValue] = useState<string | string[]>('')
 
