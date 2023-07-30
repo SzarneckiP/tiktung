@@ -1,6 +1,6 @@
 # TikTung
 
-## To check this side click below link:
+## To check this site click below link:
 
 [TikTung](https://tiktung.vercel.app/)
 
